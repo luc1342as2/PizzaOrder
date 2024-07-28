@@ -1,4 +1,4 @@
-//creating storage:
+//creating LocalStorage:
 function saveToLocalStorage() {
             var firstname = document.getElementById("firstname").value;
             var lastname = document.getElementById("lastname").value;
