@@ -1,0 +1,135 @@
+ <!-- Website used to order a pizza and a drink from Bar / Restauarant. -->
+ <!-- Lucas Ghigli -->
+ <!-- 2021/10/08 -->
+ <!-- Pizza Order Online -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pizza Order Form:</title>
+    <style>
+        body {
+            background-color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Client Details section creation: -->
+    <form id="myForm">
+        <label for="lastname">Lastname:</label>
+        <input type="text" id="lastname" name="lastname" size="20"><br><br>
+
+        <label for="firstname">Firstname:</label>
+        <input type="text" id="firstname" name="firstname" size="20"><br><br>
+
+        <label for="phonenumber">Phone number:</label>
+        <input placeholder="Enter your 10-digit phone number" type="text" id="phonenumber" name="phonenumber"
+            pattern="[0-9]{10}"><br><br>
+
+    <!-- Pizza section creation: -->
+        <div id="pizzaSize">
+            <h1>Size of the pizza</h1>
+            <label><input type="radio" name="Size_rg" value="Small">Small</label>
+            <label><input type="radio" name="Size_rg" value="Medium">Medium</label>
+            <label><input type="radio" name="Size_rg" value="Large">Large</label>
+        </div>
+
+        <div id="Typeofcrust">
+            <h1>What type of crust do you want?</h1>
+            <label><input type="radio" name="Crust_rg" value="Thin">Thin</label>
+            <label><input type="radio" name="Crust_rg" value="Hand tossed">Hand tossed</label>
+            <label><input type="radio" name="Crust_rg" value="Regular">Regular</label>
+        </div>
+
+        <div id="Typeofpizza">
+            <h1>Which type of pizza would you like to get?</h1>
+            <select name="Pizza" id="Pizza" onchange="updatePizzaImage()">
+                <option value="Veg Lovers">Veg Lovers</option>
+                <option value="Pepperoni">Pepperoni</option>
+                <option value="Cheese">Cheese</option>
+            </select>
+            <div id="pizzaImageContainer"></div>
+        </div>
+
+    <!-- Drink section creation: -->
+        <div id="Typeofdrinks">
+            <h1>Select a drink</h1>
+            <select name="Drinks" id="Drinks">
+                <option value="Coca Cola Zero">Coca Cola Zero</option>
+                <option value="Sprite">Sprite</option>
+                <option value="Canada Dry">Canada Dry</option>
+            </select>
+            <small>Price: $4.00</small>
+        </div>
+
+        <br>
+        <button type="button" onclick="saveToLocalStorage()">Submit</button>
+    </form>
+
+    <!-- LocalStorage Creation: -->
+    <script>
+        function saveToLocalStorage() {
+            var firstname = document.getElementById("firstname").value;
+            var lastname = document.getElementById("lastname").value;
+            var phonenumber = document.getElementById("phonenumber").value;
+            var pizzaSize = document.querySelector('input[name="Size_rg"]:checked').value;
+            var Typeofcrust = document.querySelector('input[name="Crust_rg"]:checked').value;
+            var Typeofpizza = document.getElementById("Pizza").value;
+            var Typeofdrinks = document.getElementById("Drinks").value;
+
+            if (firstname && lastname && phonenumber && pizzaSize && Typeofcrust && Typeofpizza && Typeofdrinks) {
+                var userData = {
+                    firstname: firstname,
+                    lastname: lastname,
+                    phonenumber: phonenumber,
+                    pizzaSize: pizzaSize,
+                    Typeofcrust: Typeofcrust,
+                    Typeofpizza: Typeofpizza,
+                    Typeofdrinks: Typeofdrinks
+                };
+
+                // Convert the userData object to a JSON string and store it in local storage
+                localStorage.setItem("userData", JSON.stringify(userData));
+
+                alert("Information saved to local storage.");
+
+                
+                document.getElementById("myForm").reset();
+            } else {
+                alert("Please fill in all the fields.");
+            }
+        }
+
+        function updatePizzaImage() {
+            var selectedPizza = document.getElementById("Pizza").value;
+            var pizzaImageContainer = document.getElementById("pizzaImageContainer");
+
+            pizzaImageContainer.innerHTML = "";
+
+            var imgElement = document.createElement("img");
+            imgElement.width = 300;
+            imgElement.height = 200;
+
+            switch (selectedPizza) {
+                case "Veg Lovers":
+                    imgElement.src = "Images/VegLovers.jpg";
+                    imgElement.alt = "Veg Lovers Pizza";
+                    break;
+                case "Pepperoni":
+                    imgElement.src = "Images/Pepperoni.jpg";
+                    imgElement.alt = "Pepperoni Pizza";
+                    break;
+                case "Cheese":
+                    imgElement.src = "Images/Cheese.jpg";
+                    imgElement.alt = "Cheese Pizza";
+                    break;
+            }
+
+            pizzaImageContainer.appendChild(imgElement);
+        }
+    </script>
+
+</body>
+
+</html>
