@@ -1,2 +1,3 @@
-# PizzaOrder
-Pizza Order created in HTML
+Pizza Order Application in HTML, CSS, and JavaScript
+
+This project is a Pizza Order application built with HTML, CSS, and JavaScript, designed to simulate an online pizza ordering experience. Users can select pizza size, toppings, and quantity, with real-time updates to the order summary and pricing displayed on the interface. JavaScript handles the interactive elements, updating selections and calculating the total cost, while HTML and CSS provide a clean, intuitive layout. This project demonstrates skills in front-end development and user interactivity, creating a smooth and responsive ordering experience.
